@@ -1,24 +1,25 @@
-const Task = require('../models/Task');
+const Task = require('../models/Type');
+const Type = require('../models/Type');
 
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
-    const tasks = await Task.find();
-    res.json(tasks);
+    const types = await Type.find();
+    res.json(types);
 });
 
 router.post('/', async (req, res) => {
     const { title, color } = req.body;
     // TODO: valdate if all properties are filled in
     // TODO: validate if color is correct hash
-    const task = new Task({
+    const type = new Type({
         title: title,
         color: color == null ? null : color
     });
     
-    await task.save();
+    await type.save();
     
-    return res.json(task);
+    return res.json(type);
 });
 
 module.exports = router;
