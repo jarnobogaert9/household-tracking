@@ -1,4 +1,3 @@
-const Task = require('../models/Type');
 const Type = require('../models/Type');
 
 const router = require('express').Router();
@@ -9,17 +8,21 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { title, color } = req.body;
-    // TODO: valdate if all properties are filled in
-    // TODO: validate if color is correct hash
-    const type = new Type({
-        title: title,
-        color: color == null ? null : color
-    });
-    
-    await type.save();
-    
-    return res.json(type);
+    try {
+        const { title, color } = req.body;
+        // TODO: valdate if all properties are filled in
+        // TODO: validate if color is correct hash
+        const type = new Type({
+            title: title,
+            color: color == null ? null : color
+        });
+        
+        await type.save();
+        
+        return res.status(201).json(type);
+    } catch (err) {
+        return res.status(500).json(err);        
+    }
 });
 
 module.exports = router;
