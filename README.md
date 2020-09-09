@@ -2,4 +2,4 @@
 
 ## Purpose
 
-Track who has done what in a household.
+Get an overview of who did what in the household.
