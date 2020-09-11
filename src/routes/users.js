@@ -6,6 +6,13 @@ const router = require('express').Router();
 router.get('/', async (req, res) => {
     try {
         const users = await User.find();
+        const reformatedUsers = users.map(user => {
+           return {
+               _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName
+           } 
+        });
         return res.status(200).json(users);
     } catch (err) {
         return res.status(500).json(err);
