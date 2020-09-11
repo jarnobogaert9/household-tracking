@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
+        // TODO: check if type is used in a task => if true we can not delete this task
         await Type.deleteOne({_id: id});
         return res.status(200).json({msg: 'Deleted type successfully.'})
     } catch (err) {

@@ -4,6 +4,12 @@ const User = require('../models/User');
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
+    try {
+        const users = await User.find();
+        return res.status(200).json(users);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
 });
 
 router.post('/', async (req, res) => {
@@ -31,9 +37,9 @@ router.post('/', async (req, res) => {
 
         return res.status(201).json({
             msg: 'User successfully created.'
-        })    
+        });
     } catch (err) {
-        return res.status(500).json(err);        
+        return res.status(500).json(err);
     }
 });
 
