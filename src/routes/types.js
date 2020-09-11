@@ -16,12 +16,22 @@ router.post('/', async (req, res) => {
             title: title,
             color: color == null ? null : color
         });
-        
+
         await type.save();
-        
+
         return res.status(201).json(type);
     } catch (err) {
-        return res.status(500).json(err);        
+        return res.status(500).json(err);
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Type.deleteOne({_id: id});
+        return res.status(200).json({msg: 'Deleted type successfully.'})
+    } catch (err) {
+        return res.status(500).json(err);
     }
 });
 
