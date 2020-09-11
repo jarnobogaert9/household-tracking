@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
                 lastName: user.lastName
            } 
         });
-        return res.status(200).json(users);
+        return res.status(200).json(reformatedUsers);
     } catch (err) {
         return res.status(500).json(err);
     }
