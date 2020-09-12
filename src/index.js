@@ -8,6 +8,7 @@ const app = express();
 
 const types = require('./routes/types');
 const users = require('./routes/users');
+const tasks = require('./routes/tasks');
 
 mongoose.connect(`${MONGODB_CONNECTION_URI}`, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.on('connected', () => {
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use(`${API_BASE_URL}/types`, types);
 app.use(`${API_BASE_URL}/users`, users);
+app.use(`${API_BASE_URL}/tasks`, tasks);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
