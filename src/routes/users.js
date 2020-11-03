@@ -7,11 +7,11 @@ router.get('/', async (req, res) => {
     try {
         const users = await User.find();
         const reformatedUsers = users.map(user => {
-           return {
-               _id: user._id,
+            return {
+                _id: user._id,
                 firstName: user.firstName,
                 lastName: user.lastName
-           } 
+            }
         });
         return res.status(200).json(reformatedUsers);
     } catch (err) {
@@ -23,13 +23,13 @@ router.post('/', async (req, res) => {
     try {
         const { firstName, lastName, email, password, password2 } = req.body;
 
-        const userFound = await User.findOne({email: email});
+        const userFound = await User.findOne({ email: email });
 
         if (userFound)
-            return res.status(400).json({msg: 'Email already in use.'})
+            return res.status(400).json({ msg: 'Email already in use.' })
 
         if (password != password2)
-            return res.status(400).json({msg: 'Passwords do not match.'});
+            return res.status(400).json({ msg: 'Passwords do not match.' });
 
         const hash = await argon2.hash(password);
 
